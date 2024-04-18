@@ -1,0 +1,8 @@
+The memory of a cmputer can be considered an array of bytes. Each
+byte of me=mory has an address. The first byte is at adedress 0, the second
+byte at address 1 , and so on until the last byte of the computer's memory.
+In modern CPUs there are hardware mapping registers which are used
+to give each process a protected address space. This means that multiple
+people can each run a program which starts at address Ox4004c8 at the
+same time. These processes perceive the same "logical" addresses, while
+they are using memory at different "physical" addresses.
