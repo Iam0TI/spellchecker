@@ -1,8 +1,4 @@
-The memory of a cmputer can be considered an array of bytes. Each
-byte of me=mory has an address. The first byte is at adedress 0, the second
-byte at address 1 , and so on until the last byte of the computer's memory.
-In modern CPUs there are hardware mapping registers which are used
-to give each process a protected address space. This means that multiple
-people can each run a program which starts at address Ox4004c8 at the
-same time. These processes perceive the same "logical" addresses, while
-they are using memory at different "physical" addresses.
+The quihshck brown fox jumps over the lazy dooog. Sheel eats apply for breakfast every morning. The car ran out of pass on the highway.
+He is going to the store to bye some groseries. My favorite color is purpel, what's yours?
+They're are many people waiting in line at the movies. The sun is shining brightly and the sky is cleer.
+ She wore a beautiful does to the party last night. The cat chased the yous, but the you set away. I'm going to the beach tomorrow, whether permitting.
