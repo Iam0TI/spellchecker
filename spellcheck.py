@@ -12,6 +12,7 @@ Make a GUI
 filename = "error.txt"
 
 #function for the argument parser
+
 #
 #function to read each word from file
 def read_words(file_des):
