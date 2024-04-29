@@ -1,6 +1,7 @@
 from textblob import Word
 import itertools
 import re
+import optparse
 import fileinput  # to store the  backup of the original  file
 """ todo later 
 add support for markdown
@@ -12,7 +13,17 @@ Make a GUI
 filename = "error.txt"
 
 #function for the argument parser
-
+def option_parser():
+        parser = optparse.OptionParser()
+        parser.add_option("-t", "--txt", dest="text_file", help="The option for working with text file")
+        parser.add_option("-m", "--ma", dest="markdown_file", help="The option for working with markdown file")
+        (options, arguments) = parser.parse_args()
+  
+        if not options.text_file:
+            parser.error("type PYTHON3 spellcheck.py --HELP")
+        elif not options.markdown_file:
+            parser.error("type PYTHON3 spellcheck.py --HELP ")
+        return options
 #
 #function to read each word from file
 def read_words(file_des):
