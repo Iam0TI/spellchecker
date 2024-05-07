@@ -1,17 +1,9 @@
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
-from spellchecker import SpellChecker
+import nltk
+nltk.download("punkt")
 
-spell = SpellChecker()
-
-# find those words that may be misspelled
-misspelled = spell.unknown(['something', 'is', 'hapenning', 'here'])
-
-for word in misspelled:
-    # Get the one `most likely` answer
-    print(spell.correction(word))
-
-    # Get a list of `likely` options
-    print(spell.candidates(word))
-
+from nltk.tokenize import word_tokenize
+file = open("error.txt",newline='' )
+result = file.read()
+words = word_tokenize(result)
+for i in words:
+       print(i)
