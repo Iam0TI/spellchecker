@@ -8,7 +8,7 @@ import fileinput  # to store the  backup of the original  file
 add support for markdown
 add the ability for the user to specify custom words and phrases that shouldn't trigger an error
 Smart detection of metadata and technical things like links and HTML and CSS and code fences in Markdown
-Make it interactive with corrections
+Make it interactive with corrections (done)
 Make a GUI
 """
 filename = "error.txt"
@@ -27,8 +27,6 @@ def option_parser():
         parser.error("type PYTHON3 spellcheck.py --HELP ")
     return options
 
-
-#
 #function to read each word from file
 def read_words(file_des: str):
     # noinspection PyTypeChecker
@@ -64,12 +62,13 @@ def find_word_location(filename, target_word) -> None:
                 pass
             line_number += 1
 
-
-
-
 #function to write the correct word in file.txt
-def file_write(filename, target_word, flags=0):
-    correct_word = correct_word_spelling(target_word)
+def file_write(filename, target_word, writing_mode :int,replace_with="nan", flags=0):
+    # the writing mode variable is  to tell us which correction mode to use
+    if writing_mode == 0:
+        correct_word = correct_word_spelling(target_word)
+    elif writing_mode == 1 :
+        correct_word = replace_with
     with open(filename, "r+") as file:
         #read the file contents
         file_contents = file.read()
@@ -78,20 +77,6 @@ def file_write(filename, target_word, flags=0):
         file.seek(0)
         file.truncate()
         file.write(file_contents)
-
-
-def replace_with (word ):
-    pass
-# def file_write(filename, target_word):
-#     correct_word = correct_word_spelling(target_word)
-#     with fileinput.FileInput(filename, inplace=True, backup='.bak') as f:
-#         for line in f:
-#             if (target_word in line):
-#                 line.replace(target_word, correct_word)
-#                 #print(line.replace(target_word, correct_word), end='')
-#             else:
-#                 print("Nothing to change")
-#function for user to choose correction option
 def choose_correction_mode(word):
     find_word_location(filename, word)
     confirm_edit =input(f'''
@@ -103,29 +88,25 @@ def choose_correction_mode(word):
         while True:
             try :
                 option = int (input('''
-                    Choose from the 3 option to edit the word:
+                    Choose from the 2 option to edit the word:
                     0 - auto correct
-                    1 - show list of correct words
-                    2 - replace with a given word
+                    1 - replace with a given word 
                 '''))
-                if option in range(0,3):
+                if option in range(0,2):
                     break
                 else :
-                    print(f"option must be 0,1 or 2")
+                    print(f"option must be 0 or 1")
             except ValueError:
                     print(" Option must be  an integer")
 
-        if option == 0 :
+        if option == 0:
             print("autocorrecting.................")
             correct_word_spelling(word)
-            file_write(filename, word)
+            file_write(filename, word ,option)
 
         elif option == 1:
-            print("choose from the list ")
-            pass
-        elif option == 2 :
             given_word = str((input(" Enter new word :  ")))
-            replace_with(given_word)
+            file_write(filename, word , option, given_word)
 
 # function to check for error in file.txt
 def check_word_spelling(word):
@@ -134,7 +115,7 @@ def check_word_spelling(word):
     if word == result[0][0]:
         pass
     else:
-        choose_correct_mode(word)
+        choose_correction_mode(word)
 
 #function to read from file.txt
 def file_reader(filename):
